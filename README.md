@@ -8,6 +8,11 @@
       ... As demais coisas da .env
       DRIVER_FELICITY=mongoose
     ```
+- Para conexões de mongo deve conter também na `.env`
+    ```
+      MONGODB_URI=mongodb://user:password@ip:port/
+      MONGODB_NAME=database
+    ```
 
 ## Instalação
 
