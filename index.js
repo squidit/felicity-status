@@ -3,7 +3,7 @@
  * @desc Plugin para rota de status
  */
 const ActionWrapper = require('./actions/defineAction')
-
+const {version} = require('./package.json')
 
 /**
  *
@@ -15,7 +15,6 @@ const emitSuccessMessage = ({ reply }) => {
     message: 'Up and running'
   })
 }
-
 
 const statusPlugin = {
   register: async (server, options, next) => {
@@ -42,8 +41,7 @@ const statusPlugin = {
 }
 statusPlugin.register.attributes = {
   name: 'sq-status',
-  version: '0.0.1',
-  multiple: false
+  version: version
 }
 
 module.exports = statusPlugin
