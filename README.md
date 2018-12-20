@@ -42,4 +42,4 @@ run()
 
 ## Como felicity funciona
 
-Felicity é responsável por tratar como a rota `/status` deve retornar, ela olha para a conexão da aplicação verificando se a mesma esta conectada através da interface `mongoose.connection.readyState`, caso retorne `1` que significa `connected`, o plugin pega todos os modelos  registrado pelo mongoose da aplicação e faz uma querie geral para todos os coleções verificando se **TODAS** retornam algo, caso de algum erro, nesse processo, então gera um erro 500, agora caso dê certo, gera um erro 200
+Felicity é responsável por tratar como a rota `/status` deve retornar, ela olha para a conexão da aplicação verificando se a mesma esta conectada através da interface do mongoClient, o plugin felicity faz a conexão usando as variaveis `MONGODB_URI` e `MONGODB_NAME` pegando todas as collections do banco e a partir dai faz uma querie geral para todas as coleções verificando se **TODAS** as queries retornam algum resultado, caso de algum erro nesse processo, então gera um erro 500, agora caso dê certo, gera um erro 200
