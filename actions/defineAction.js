@@ -1,4 +1,4 @@
-const mongooseStrategy = require('./mongooseStrategy')
+const mongoStrategy = require('./mongoStrategy')
 
 /**
  * @desc Essa implemntação é um Strategy Pattern, ou seja
@@ -12,7 +12,7 @@ const mongooseStrategy = require('./mongooseStrategy')
 
 const defineAction = (driver, reply) => {
   const allowedActions = {
-    'mongoose': mongooseStrategy
+    'mongo': mongoStrategy
   }
   const action = allowedActions[driver] || null
   if (!action) throw new Error(`Não foi possível reconhecer o driver ${driver}`)

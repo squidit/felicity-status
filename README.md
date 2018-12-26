@@ -6,7 +6,7 @@
 - Na `.env` do projeto definir o tipo de driver, a principio o mongoose é o unico driver disponível, o exemplo na `.env` esta no trecho a baixo:
     ```
       ... As demais coisas da .env
-      DRIVER_FELICITY=mongoose
+      DRIVER_FELICITY=mongo
     ```
 - Para conexões de mongo deve conter também na `.env`
     ```
