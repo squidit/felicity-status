@@ -3,16 +3,35 @@
 
 ## Pré requisito
 - Ter o [mongoose](https://www.npmjs.com/package/mongoose) instalado no `package.json`
-- Na `.env` do projeto definir o tipo de driver, a principio o mongoose é o unico driver disponível, o exemplo na `.env` esta no trecho a baixo:
-    ```
-      ... As demais coisas da .env
-      DRIVER_FELICITY=mongo
-    ```
-- Para conexões de mongo deve conter também na `.env`
-    ```
-      MONGODB_URI=mongodb://user:password@ip:port/
-      MONGODB_NAME=database
-    ```
+- Na `.env` do projeto definir o tipo de driver,
+  - `mongo` - Para projetos que fazem conexões com mongo
+    - Para essa conexão é necessário ter as seguintes envs
+       ```
+        MONGODB_URI=mongodb://user:password@ip:port/
+        MONGODB_NAME=database
+      ```
+  - `mysql` - Para projetos que fazem conexões com o MYSQL
+    -  Para essa conexão é necessário ter as seguintes envs.
+      ```
+        MYSQL_DATABASE=database
+        MYSQL_HOST=localhost
+        MYSQL_USERNAME=user
+        MYSQL_PASSWORD=password
+      ```
+
+
+### Exemplo para projetos que usam mongo
+  ```
+    ... As demais coisas da .env
+    DRIVER_FELICITY=mongo
+  ```
+
+### Exemplo para projetos que usam mysql
+  ```
+    ... As demais coisas da .env
+    DRIVER_FELICITY=mysql
+  ```
+
 
 ## Instalação
 
