@@ -1,4 +1,5 @@
 const mongoStrategy = require('./mongoStrategy')
+const mysqlStrategy = require('./mysqlStrategy')
 
 /**
  * @desc Essa implemntação é um Strategy Pattern, ou seja
@@ -11,8 +12,10 @@ const mongoStrategy = require('./mongoStrategy')
  */
 
 const defineAction = (driver, reply) => {
+  console.log({driver})
   const allowedActions = {
-    'mongo': mongoStrategy
+    'mongo': mongoStrategy,
+    'mysql': mysqlStrategy
   }
   const action = allowedActions[driver] || null
   if (!action) throw new Error(`Não foi possível reconhecer o driver ${driver}`)

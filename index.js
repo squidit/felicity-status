@@ -25,7 +25,7 @@ const statusPlugin = {
         try {
           if (!process.env.DRIVER_FELICITY) throw Error('Missing DRIVER Felicity')
           return ActionWrapper.action(process.env.DRIVER_FELICITY, reply)
-                .then(emitSuccessMessage)
+            .then(emitSuccessMessage)
         } catch (err) {
           reply({
             statusCode: 500,

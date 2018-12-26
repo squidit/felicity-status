@@ -1,6 +1,4 @@
-const mongoose = require('mongoose')
-const {find} = require('../command/queryCommand')
-const MongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb').MongoClient
 
 const connect = (reply) => {
   return new Promise(
@@ -10,6 +8,7 @@ const connect = (reply) => {
 
       //  Conexão com o banco
       MongoClient.connect(process.env.MONGODB_URI, (err, client) => {
+        if (err) reject(err)
         console.log('Connected successfully to server')
         const db = client.db(process.env.MONGODB_NAME)
         resolve({ mongo: db, reply, connection: client })
@@ -64,19 +63,6 @@ const checkMongoStatus = async ({ mongo, reply, connection }) => {
 
           resolve({reply, mongo, connection})
         })
-        // console.log('Chegou', collections)
-
-        // //  Pega a primeira coleção disponivel
-        // const firstCollection = Object.keys(mongoose.connections[0].collections)[0] || false
-        // //  Pega todos os modelos existente no mongoose
-        // const models = Object.keys(mongoose.connections[0].collections[firstCollection].conn.models)
-        // const queue = []
-        // for (let model of models) {
-        //   queue.push(find(model))
-        // }
-
-        // await Promise.all(queue)
-        // return resolve({ reply })
       } catch (err) {
         console.log(err)
         reject(err)
@@ -85,11 +71,8 @@ const checkMongoStatus = async ({ mongo, reply, connection }) => {
   )
 }
 
-
 const run = (reply) => {
-  return connect(reply)
-          .then(checkMongoStatus)
-          .then(closeConnection)
+  return connect(reply).then(checkMongoStatus).then(closeConnection)
 }
 
 module.exports = {
