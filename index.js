@@ -20,7 +20,7 @@ const statusPlugin = {
   register: async (server, options, next) => {
     server.route({
       method: 'GET',
-      path: '/status',
+      path: '/v1/status',
       handler: (request, reply) => {
         try {
           if (!process.env.DRIVER_FELICITY) throw Error('Missing DRIVER Felicity')
