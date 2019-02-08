@@ -15,7 +15,7 @@
   "author": "Guilherme Pereira <guiihpr@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "mongodb": "^3.1.10",
+    "mongodb": "^3.1.13",
     "mysql": "^2.16.0"
   }
 }
