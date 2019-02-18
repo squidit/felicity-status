@@ -7,14 +7,9 @@
   - `mongo` - Para projetos que fazem conexões com mongo
     - Para essa conexão é necessário ter as seguintes envs
        ```
-        MONGODB_USERNAME=user
-        MONGODB_PASSWORD=password
-        MONGODB_HOST=host
-        MONGODB_PORT=27017
+        MONGODB_URI=mongodb://user:password@ip:port/
         MONGODB_NAME=database
-        MONGODB_COLLECTIONS=collection1,collection2,collections3
       ```
-      É necessário mapear as collections, pois depedendo do usuário do banco, ele não possui permissão para listar todas as collections.
   - `mysql` - Para projetos que fazem conexões com o MYSQL
     -  Para essa conexão é necessário ter as seguintes envs.
       ```
