@@ -19,7 +19,7 @@ const emitSuccessMessage = ({ reply }) => {
 
 const statusPlugin = {
   register: async (server, options, next) => {
-    const prefix = _.get(server, 'realm.modifiers.route.prefix', '/v1')
+    const prefix = _.get(server, 'realm.modifiers.route.prefix', '')
     server.route({
       method: 'GET',
       path: `${prefix}/status`,
