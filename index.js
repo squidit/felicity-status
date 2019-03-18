@@ -3,6 +3,7 @@
  * @desc Plugin para rota de status
  */
 const ActionWrapper = require('./actions/defineAction')
+const _ = require('lodash')
 const {version} = require('./package.json')
 
 /**
@@ -18,9 +19,10 @@ const emitSuccessMessage = ({ reply }) => {
 
 const statusPlugin = {
   register: async (server, options, next) => {
+    const prefix = _.get(server, 'realm.modifiers.route.prefix', '/v1')
     server.route({
       method: 'GET',
-      path: '/v1/status',
+      path: `${prefix}/status`,
       handler: (request, reply) => {
         try {
           if (!process.env.DRIVER_FELICITY) throw Error('Missing DRIVER Felicity')
