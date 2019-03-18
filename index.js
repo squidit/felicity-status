@@ -19,10 +19,9 @@ const emitSuccessMessage = ({ reply }) => {
 
 const statusPlugin = {
   register: async (server, options, next) => {
-    const prefix = _.get(server, 'realm.modifiers.route.prefix', '')
     server.route({
       method: 'GET',
-      path: `${prefix}/status`,
+      path: `/v1/status`,
       handler: (request, reply) => {
         try {
           if (!process.env.DRIVER_FELICITY) throw Error('Missing DRIVER Felicity')
