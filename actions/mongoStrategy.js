@@ -57,7 +57,8 @@ const checkMongoStatus = async ({ mongo, reply, connection }) => {
       try {
         connection.listCollections().toArray(async (err, itens) => {
           if (err) reject(err)
-          const collections = itens.map(it => it.name)
+          const INVALID_COLLECTIONS = ['system.profile', '_timeOperation']
+          const collections = itens.filter(collection => !INVALID_COLLECTIONS.includes(collection.name)).map(it => it.name)
           const queue = []
           for (let collection of collections) {
             queue.push(transformFindIntoPromise(connection.collection(collection)))
