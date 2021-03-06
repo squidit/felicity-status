@@ -16,7 +16,7 @@ const {
 const getAllDatabases = ({connection, reply}) => {
   return new Promise(
     (resolve, reject) => {
-      connection.query('show tables;', (err, results) => {
+      connection.query('show full tables where Table_Type = "BASE TABLE";', (err, results) => {
         if (err) reject(err)
         resolve({connection, reply, results})
       })
