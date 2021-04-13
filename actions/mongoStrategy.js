@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient
 
-const connect = (reply) => {
+const connect = () => {
   return new Promise(
     (resolve, reject) => {
       if (!process.env.MONGODB_URI) throw new Error(`There's no MONGODB_URI variabele found`)
@@ -14,7 +14,7 @@ const connect = (reply) => {
         (err, client) => {
           if (err) reject(err)
           console.log('Connected successfully to server')
-          resolve({ mongo: client, reply, connection: client.db() })
+          resolve({ mongo: client, connection: client.db() })
         })
     }
   )

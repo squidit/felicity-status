@@ -11,15 +11,14 @@ const mysqlStrategy = require('./mysqlStrategy')
  * @param {function} reply - função de resposta
  */
 
-const defineAction = (driver, reply) => {
-  console.log({driver})
+const defineAction = (driver) => {
   const allowedActions = {
     'mongo': mongoStrategy,
     'mysql': mysqlStrategy
   }
   const action = allowedActions[driver] || null
   if (!action) throw new Error(`Não foi possível reconhecer o driver ${driver}`)
-  return action.run(reply)
+  return action.run()
 }
 
 module.exports = {
