@@ -13,12 +13,12 @@ const {
  * @param {function} reply - Reply do hapi
  * @returns {Promise<{connection, reply}>} - promise
  */
-const getAllDatabases = ({connection, reply}) => {
+const getAllDatabases = ({connection}) => {
   return new Promise(
     (resolve, reject) => {
       connection.query('show full tables where Table_Type = "BASE TABLE";', (err, results) => {
         if (err) reject(err)
-        resolve({connection, reply, results})
+        resolve({connection, results})
       })
     }
   )

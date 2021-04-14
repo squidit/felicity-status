@@ -38,13 +38,35 @@
 No seu projeto vá no arquivo onde registra os plugins, geralmente fica dentro do arquivo `app.js`, e lá importe a felicity, e pronto, felicity estará disponível na rota `/status`
 
 ex:
+### Hapi < 18
+```js
+const felicity = require('./felicity-status/')
+
+const registraPlugins = () => {
+  //  Demais processos
+   const registers = [hapiAuthJWT, sqWinston.middlewares.hapi16, sqStatus, felicity]
+
+  return server.register(registers)
+}
+
+const run = () => {
+  return connectDatabase().
+  .then(() => registraPlugins(server))
+  //  Demais imports
+}
+
+run()
+
+```
+
+### Para o Hapi 18+
 
 ```js
 const felicity = require('./felicity-status/')
 
 const registraPlugins = () => {
   //  Demais processos
-   const registers = [hapiAuthJWT, sqWinston.middlewares.hapi16, sqStatus]
+   const registers = [hapiAuthJWT, sqWinston.middlewares.hapi16, sqStatus, felicity.hapi18]
 
   return server.register(registers)
 }
