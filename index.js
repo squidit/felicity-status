@@ -3,7 +3,7 @@
  * @desc Plugin para rota de status
  */
 const ActionWrapper = require('./actions/defineAction')
-const {version} = require('./package.json')
+const { version } = require('./package.json')
 
 const statusPluginV18 = {
   name: 'sq-status',
@@ -11,7 +11,7 @@ const statusPluginV18 = {
   register: async function (server, options) {
     server.route({
       method: 'GET',
-      path: `/v1/status`,
+      path: '/v1/status',
       handler: async (_, reply) => {
         try {
           if (!process.env.DRIVER_FELICITY) throw Error('Missing DRIVER Felicity')
@@ -28,7 +28,7 @@ const statusPluginV18 = {
         }
       }
     })
-    console.log(`statusPlugin is ready!`)
+    console.log('statusPlugin is ready!')
   }
 }
 
@@ -38,12 +38,12 @@ const statusPlugin = {
   register: async (server, options, next) => {
     server.route({
       method: 'GET',
-      path: `/v1/status`,
+      path: '/v1/status',
       handler: async (request, reply) => {
         try {
           if (!process.env.DRIVER_FELICITY) throw Error('Missing DRIVER Felicity')
           return ActionWrapper.action(process.env.DRIVER_FELICITY)
-            .then(result => emitSuccessMessage(({reply})))
+            .then(result => emitSuccessMessage(({ reply })))
         } catch (err) {
           reply({
             statusCode: 500,
@@ -52,7 +52,7 @@ const statusPlugin = {
         }
       }
     })
-    console.log(`statusPlugin is ready!`)
+    console.log('statusPlugin is ready!')
 
     next()
   }
