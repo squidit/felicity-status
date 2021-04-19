@@ -13,7 +13,8 @@ const executeQuery = ({ connection, reply, results }) => new Promise((resolve, r
       if (err) {
         throw new Error(err.message)
       } else {
-        resolve(results)
+        console.log('MySQL version:', results)
+        resolve({ connection, reply, results })
       }
     })
   } catch (err) {
