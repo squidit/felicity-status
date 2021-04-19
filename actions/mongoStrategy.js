@@ -3,8 +3,8 @@ const MongoClient = require('mongodb').MongoClient
 const connect = () => {
   return new Promise(
     (resolve, reject) => {
-      if (!process.env.MONGODB_URI) throw new Error(`There's no MONGODB_URI variabele found`)
-      if (!process.env.MONGODB_NAME) throw new Error(`There's no MONGODB_NAME variabele found`)
+      if (!process.env.MONGODB_URI) throw new Error('There\'s no MONGODB_URI variabele found')
+      if (!process.env.MONGODB_NAME) throw new Error('There\'s no MONGODB_NAME variabele found')
 
       //  Conexão com o banco
       MongoClient.connect(`${process.env.MONGODB_URI}${process.env.MONGODB_NAME}`,
@@ -20,13 +20,13 @@ const connect = () => {
   )
 }
 
-const closeConnection = ({reply, mongo}) => {
+const closeConnection = ({ reply, mongo }) => {
   return new Promise(
     (resolve, reject) => {
       try {
         console.log('Fechando conexão')
         mongo.close()
-        resolve({reply, mongo})
+        resolve({ reply, mongo })
       } catch (err) {
         console.log(err)
         reject(err)
@@ -60,12 +60,12 @@ const checkMongoStatus = async ({ mongo, reply, connection }) => {
           const INVALID_COLLECTIONS = ['system.profile', '_timeOperation']
           const collections = itens.filter(collection => !INVALID_COLLECTIONS.includes(collection.name)).map(it => it.name)
           const queue = []
-          for (let collection of collections) {
+          for (const collection of collections) {
             queue.push(transformFindIntoPromise(connection.collection(collection)))
           }
           await Promise.all(queue)
 
-          resolve({reply, mongo, connection})
+          resolve({ reply, mongo, connection })
         })
       } catch (err) {
         console.log(err)
