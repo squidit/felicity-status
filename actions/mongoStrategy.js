@@ -12,7 +12,7 @@ const connect = () => {
           useNewUrlParser: true
         },
         (err, client) => {
-          if (err) reject(err)
+          if (err) return reject(err)
           console.log('Connected successfully to server')
           resolve({ mongo: client, connection: client.db() })
         })
@@ -55,18 +55,8 @@ const checkMongoStatus = async ({ mongo, reply, connection }) => {
   return new Promise(
     async (resolve, reject) => {
       try {
-        connection.listCollections().toArray(async (err, itens) => {
-          if (err) reject(err)
-          const INVALID_COLLECTIONS = ['system.profile', '_timeOperation']
-          const collections = itens.filter(collection => !INVALID_COLLECTIONS.includes(collection.name)).map(it => it.name)
-          const queue = []
-          for (const collection of collections) {
-            queue.push(transformFindIntoPromise(connection.collection(collection)))
-          }
-          await Promise.all(queue)
-
-          resolve({ reply, mongo, connection })
-        })
+        const stats = await connection.stats()
+        resolve({ reply, mongo, connection, dbOk: stats.ok })
       } catch (err) {
         console.log(err)
         reject(err)
@@ -76,7 +66,12 @@ const checkMongoStatus = async ({ mongo, reply, connection }) => {
 }
 
 const run = (reply) => {
-  return connect(reply).then(checkMongoStatus).then(closeConnection)
+  return connect(reply)
+  .then(checkMongoStatus)
+  .then(closeConnection)
+  .catch(err => {
+    throw err
+  })
 }
 
 module.exports = {

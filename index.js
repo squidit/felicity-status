@@ -42,12 +42,14 @@ const statusPlugin = {
       handler: async (request, reply) => {
         try {
           if (!process.env.DRIVER_FELICITY) throw Error('Missing DRIVER Felicity')
-          return ActionWrapper.action(process.env.DRIVER_FELICITY)
-            .then(result => emitSuccessMessage(({ reply })))
+          await ActionWrapper.action(process.env.DRIVER_FELICITY)
+          emitSuccessMessage({reply})
         } catch (err) {
-          reply({
-            statusCode: 500,
-            message: err.message
+          console.log(err)
+          return reply({
+            statusCode: 503,
+            message: 'Can\'t connect into DB',
+            code: err.code
           })
         }
       }
