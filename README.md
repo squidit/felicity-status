@@ -2,8 +2,9 @@
 # Felicity plugin
 
 ## Pré requisito
-- Ter o [mongoose](https://www.npmjs.com/package/mongoose) instalado no `package.json`
+- Ter o [mongoose](https://www.npmjs.com/package/mongoose) instalado no `package.json` (para projetos que conectam no MongoDB)
 - Na `.env` do projeto definir o tipo de driver,
+  - `noDB` - Para projetos que não fazem conexão em Mongo ou MySQL, nesse caso o pacote só expõe um endpoint de `/status`
   - `mongo` - Para projetos que fazem conexões com mongo
     - Para essa conexão é necessário ter as seguintes envs
        ```
