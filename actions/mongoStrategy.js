@@ -35,17 +35,6 @@ const closeConnection = ({ reply, mongo }) => {
   )
 }
 
-const transformFindIntoPromise = (collection) => {
-  return new Promise(
-    (resolve, reject) => {
-      collection.find({}).limit(1).toArray((err, docs) => {
-        if (err) reject(err)
-        resolve(docs)
-      })
-    }
-  )
-}
-
 /**
  * @desc Pega de forma dinamica todos os modelos e faz uma query geral para eles, verificando se volta resultados
  * @param {*} mongoose - Objeto do mongoose

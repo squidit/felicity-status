@@ -14,10 +14,12 @@ const mysqlStrategy = require('./mysqlStrategy')
 const defineAction = (driver) => {
   const allowedActions = {
     mongo: mongoStrategy,
-    mysql: mysqlStrategy
+    mysql: mysqlStrategy,
+    noDB: 'noStrategy'
   }
   const action = allowedActions[driver] || null
   if (!action) throw new Error(`Não foi possível reconhecer o driver ${driver}`)
+  if (action === 'noStrategy') return
   return action.run()
 }
 
